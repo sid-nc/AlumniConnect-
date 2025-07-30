@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head><link rel="stylesheet" href="/src/main/resources/static/styles.css"><title>Message a Person</title></head>
+<body>
+    <div>
+        <a th:href="@{/}">Home</a> |
+        <a th:href="@{/register}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Register Alumni</a> |
+        <a th:href="@{/job}" th:if="${#authorization.expression('hasRole(''ADMIN'')')}">Post Job</a> |
+        <a th:href="@{/message}">Message a Person</a> |
+        <a th:href="@{/login}">Login</a> |
+        <a th:href="@{/signup}">Signup</a>
+    </div>
+    <hr/>
+    
+
+
+<h2>Send a Message</h2>
+<form th:action="@{/message}" th:object="${message}" method="post">
+    To (Email): <input type="email" th:field="*{toEmail}"/><br/>
+    Subject: <input type="text" th:field="*{subject}"/><br/>
+    Message: <textarea th:field="*{content}"></textarea><br/>
+    <button type="submit">Send</button>
+</form>
+</body>
+</html>
